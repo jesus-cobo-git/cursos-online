@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CourseDetail from '../../components/CourseDetail';
+import { database } from '../../firebase/config';
+import { ref, get } from 'firebase/database';
+import type { Course } from '../../types/Course';
+
+const { id } = Astro.params;
+
+let course: Course | null = null;
+let error = null;
+
+try {
+  const courseRef = ref(database, `courses/${id}`);
+  const snapshot = await get(courseRef);
+  
+  if (snapshot.exists()) {
+    course = {
+      id,
+      ...snapshot.val()
+    };
+  } else {
+    error = 'Curso no encontrado';
+    return Astro.redirect('/404');
+  }
+} catch (err) {
+  console.error(err);
+  error = 'Error al cargar el curso';
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={course ? course.title : 'Curso no encontrado'}>
+  <main class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      {error && (
+        <div class="text-center py-12">
+          <h2 class="text-2xl font-bold text-red-600 mb-4">{error}</h2>
+          <a href="/" class="text-primary-600 hover:text-primary-700">
+            Volver al inicio
+          </a>
+        </div>
+      )}
+      
+      {course && (
+        <CourseDetail client:load course={course} />
+      )}
+    </div>
+  </main>
+</Layout> 

@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CourseList from '../../components/CourseList';
+import CategoryFilter from '../../components/CategoryFilter';
+
+const categoria = Astro.url.searchParams.get('categoria');
+---
+
+<Layout title="Cursos - TechCourses">
+  <main class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Todos los Cursos</h1>
+        
+        <div class="mb-8">
+          <CategoryFilter client:load initialCategory={categoria || 'Todos'} />
+        </div>
+
+        <div id="course-list-container">
+          <CourseList client:load initialCategory={categoria || 'Todos'} />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const courseListContainer = document.getElementById('course-list-container');
+    
+    // Escuchar cambios en la URL
+    const handleUrlChange = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const categoria = searchParams.get('categoria') || 'Todos';
+      
+      // Forzar la recarga del componente CourseList
+      if (courseListContainer) {
+        courseListContainer.innerHTML = '';
+        const courseList = document.createElement('astro-island');
+        courseList.setAttribute('client', 'load');
+        courseList.setAttribute('component-url', '/src/components/CourseList');
+        courseList.setAttribute('props', JSON.stringify({ initialCategory: categoria }));
+        courseListContainer.appendChild(courseList);
+      }
+    };
+
+    // Escuchar cambios en el historial
+    window.addEventListener('popstate', handleUrlChange);
+  });
+</script> 

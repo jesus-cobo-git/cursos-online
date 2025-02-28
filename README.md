@@ -1,4 +1,106 @@
-# Astro Starter Kit: Basics
+# Plataforma de Cursos Online
+
+Una plataforma moderna para la venta de cursos online construida con Astro, React, TailwindCSS y Firebase.
+
+## Características
+
+- 🎨 Diseño moderno y responsivo con TailwindCSS
+- 🚀 Rendimiento optimizado con Astro
+- ⚛️ Componentes interactivos con React
+- 🔥 Base de datos en tiempo real con Firebase
+- 🛒 Sistema de compras simulado
+- 📹 Reproductor de video para contenido del curso
+- 🔍 Búsqueda y filtrado de cursos
+- ⭐ Sistema de valoraciones
+- 📱 Diseño adaptable a todos los dispositivos
+
+## Requisitos Previos
+
+- Node.js (v18 o superior)
+- npm o yarn
+- Una cuenta de Firebase
+
+## Configuración
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/tu-usuario/plataforma-cursos-online.git
+cd plataforma-cursos-online
+```
+
+2. Instala las dependencias:
+```bash
+npm install
+```
+
+3. Configura Firebase:
+   - Crea un nuevo proyecto en [Firebase Console](https://console.firebase.google.com)
+   - Habilita Realtime Database
+   - Copia las credenciales de configuración
+   - Reemplaza las credenciales en `src/firebase/config.ts`
+
+4. Inicializa la base de datos con datos de ejemplo:
+```bash
+npm run ts-node src/scripts/initializeDatabase.ts
+```
+
+## Desarrollo
+
+Para iniciar el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:3000`
+
+## Construcción
+
+Para construir la aplicación para producción:
+
+```bash
+npm run build
+```
+
+Los archivos generados estarán en la carpeta `dist/`
+
+## Estructura del Proyecto
+
+```
+src/
+├── components/     # Componentes React y Astro
+├── layouts/        # Layouts de Astro
+├── pages/          # Páginas de Astro
+├── firebase/       # Configuración de Firebase
+├── types/         # Tipos de TypeScript
+├── scripts/       # Scripts de utilidad
+└── styles/        # Estilos globales
+```
+
+## Tecnologías Utilizadas
+
+- [Astro](https://astro.build)
+- [React](https://reactjs.org)
+- [TailwindCSS](https://tailwindcss.com)
+- [Firebase](https://firebase.google.com)
+
+## Contribuir
+
+1. Haz fork del proyecto
+2. Crea una rama para tu característica (`git checkout -b feature/AmazingFeature`)
+3. Haz commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Haz push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## Contacto
+
+Tu Nombre - [@tutwitter](https://twitter.com/tutwitter)
+
+Link del proyecto: [https://github.com/tu-usuario/plataforma-cursos-online](https://github.com/tu-usuario/plataforma-cursos-online)
 
 ```sh
 npm create astro@latest -- --template basics
